@@ -4,8 +4,9 @@ extends Node2D
 var bulletScene = preload("res://Scenes/Bullet.tscn")
 var enemyScene = preload("res://Scenes/Enemy.tscn")
 var playercene = preload("res://Scenes/Player.tscn")
-var rows = 4
-var collumns = 6
+
+var rows = 2
+var collumns = 3
 	
 #spawn player first	
 func _ready():
@@ -30,17 +31,16 @@ func _on_BulletTimer_timeout():
 	chance_to_spawn_bullet()
 		
 func chance_to_spawn_bullet():
-	var randEnemy = int(round(rand_range(3, 26)))
+	var randEnemy = int(round(rand_range(3, 7)))
 	var enemy = get_child(randEnemy)
-	var area2d = enemy.get_node("EnemyArea2D")
-	var enemyArea2DScript = area2d.get_script().new()
-	enemyArea2DScript.isBodyBlocking()
-	if rand_range(0, 6) < 7 and enemyArea2DScript.bodyBlocking == false:
+	enemy.isBodyBlocking()
+	if rand_range(0, 6) < 7 and enemy.bodyBlocking == false:
 			shoot_bullet(enemy)
 		
 func shoot_bullet(var enemy):
 	var bullet = bulletScene.instance()
 	var spawnLocation = Vector2((enemy.position.x),(enemy.position.y + 60))
+	
 	add_child(bullet)
 	bullet.position = spawnLocation
 	bullet.scale.x = 0.6

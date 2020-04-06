@@ -1,16 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/EnemyArea2D.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 96 )
-
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -25,11 +23,4 @@ wait_time = 1.4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="EnemyArea2D" type="Area2D" parent="."]
-position = Vector2( 0, 64 )
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea2D"]
-shape = SubResource( 2 )
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
