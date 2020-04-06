@@ -5,8 +5,8 @@ var bulletScene = preload("res://Scenes/Bullet.tscn")
 var enemyScene = preload("res://Scenes/Enemy.tscn")
 var playercene = preload("res://Scenes/Player.tscn")
 
-var rows = 2
-var collumns = 3
+var rows = 4
+var collumns = 6
 	
 #spawn player first	
 func _ready():
@@ -31,7 +31,7 @@ func _on_BulletTimer_timeout():
 	chance_to_spawn_bullet()
 		
 func chance_to_spawn_bullet():
-	var randEnemy = int(round(rand_range(3, 7)))
+	var randEnemy = int(round(rand_range(3, 26)))
 	var enemy = get_child(randEnemy)
 	enemy.isBodyBlocking()
 	if rand_range(0, 6) < 7 and enemy.bodyBlocking == false:
@@ -39,8 +39,7 @@ func chance_to_spawn_bullet():
 		
 func shoot_bullet(var enemy):
 	var bullet = bulletScene.instance()
-	var spawnLocation = Vector2((enemy.position.x),(enemy.position.y + 60))
-	
+	var spawnLocation = Vector2((enemy.position.x),(enemy.position.y + 60))	
 	add_child(bullet)
 	bullet.position = spawnLocation
 	bullet.scale.x = 0.6

@@ -15,11 +15,9 @@ func _on_JumpTimer_timeout():
 	movement()
 
 func movement():
-	jumps += 1
-	
+	jumps += 1	
 	if jumps < JumpsToSide:
-		position.x += jumpDistance
-		
+		position.x += jumpDistance		
 	elif jumps == JumpsToSide:
 		jumpDistance = -jumpDistance
 		$JumpTimer.wait_time -= 0.2
@@ -28,7 +26,7 @@ func movement():
 
 func isBodyBlocking():
 	var spaceState = get_world_2d().direct_space_state
-	var sightCheck = spaceState.intersect_ray(position, Vector2(0, 70), [self, get_parent().get_node("Player")], collision_mask)
+	var sightCheck = spaceState.intersect_ray(position, Vector2(position.x, position.y + 70), [self, get_parent().get_node("Player")], collision_mask)
 	if sightCheck:
 		if sightCheck.collider.is_in_group("Enemy"):
 			bodyBlocking = true
