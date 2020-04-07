@@ -9,8 +9,12 @@ func _physics_process(_delta):
 	elif position.y < -60:
 		delete_self()
 
-func _on_Area2D_body_entered(_body):
+func _on_Area2D_body_entered(body):
+	check_body(body)
 	delete_self()
 
+func check_body(var body):
+	body.self_hit()
+
 func delete_self():
-	get_parent().remove_child(self)
+	queue_free()

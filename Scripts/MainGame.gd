@@ -1,4 +1,3 @@
-# Main Script
 extends Node2D
 
 var bulletScene = preload("res://Scenes/Bullet.tscn")
@@ -9,11 +8,17 @@ var rows = 5
 var collumns = 10
 
 func _ready():
+	InitializePlayer()
+	InitializeEnemies()
+	InitializeBulletTimer()
+
+func InitializePlayer():
 	var player = playercene.instance()
 	add_child(player)
 	player.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y - 40)
 	player.scale = Vector2(4,4)
-	
+
+func InitializeEnemies():
 	for row in rows:
 		for collumn in collumns:
 			var enemy = enemyScene.instance()
@@ -27,9 +32,11 @@ func _ready():
 			else:
 				enemy.get_child(0).play("Enemy1")
 			enemy.scale = Vector2(3,3)
+			enemy.name = str(collumns * row + collumn)
 			enemyArray.insert(enemyArray.size(), enemy)
-			
-	$BulletTimer.wait_time = 0.6
+
+func InitializeBulletTimer():
+	$BulletTimer.wait_time = 1
 	$BulletTimer.start()
 
 func _on_BulletTimer_timeout():
@@ -58,3 +65,7 @@ func player_shoot_bullet(var player):
 	bullet.position = spawnLocation
 	bullet.motion = Vector2(0, -5)
 	bullet.scale = Vector2(4, 4)
+
+func enemy_remove_from_array(enemy):
+	var enemyIndex = int(enemy.name)
+	enemyArray.remove(enemyIndex)

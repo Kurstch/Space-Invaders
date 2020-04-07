@@ -1,7 +1,6 @@
-# Enemy
 extends KinematicBody2D
 
-var bodyBlocking
+var bodyBlocking = false
 var jumpDistance = 10
 var JumpsToSide
 var jumps = 0 
@@ -28,9 +27,13 @@ func movement():
 # Using raycast
 func isBodyBlocking():
 	var spaceState = get_world_2d().direct_space_state
-	var sightCheck = spaceState.intersect_ray(position, Vector2(position.x, position.y + 10), [self, get_parent().get_node("Player")], collision_mask)
+	var sightCheck = spaceState.intersect_ray(position, Vector2(position.x, position.y + 30), [self], collision_mask)
 	if sightCheck:
 		if sightCheck.collider.is_in_group("Enemy"):
 			bodyBlocking = true
 		else:
 			bodyBlocking = false
+
+func self_hit():
+	get_parent().call("enemy_remove_from_array", self)
+	queue_free()
