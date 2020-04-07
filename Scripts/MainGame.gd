@@ -4,11 +4,10 @@ extends Node2D
 var bulletScene = preload("res://Scenes/Bullet.tscn")
 var enemyScene = preload("res://Scenes/Enemy.tscn")
 var playercene = preload("res://Scenes/Player.tscn")
-
+var enemyArray = []
 var rows = 4
 var collumns = 6
-	
-#spawn player first	
+
 func _ready():
 	var player = playercene.instance()
 	add_child(player)
@@ -22,7 +21,7 @@ func _ready():
 			enemy.scale.x = 0.8
 			enemy.scale.y = 0.8
 			enemy.position = spawnLocation
-			enemy.name = str(collumns * row + collumn)
+			enemyArray.insert(enemyArray.size(), enemy)
 			
 	$BulletTimer.wait_time = 0.6
 	$BulletTimer.start()
@@ -31,16 +30,24 @@ func _on_BulletTimer_timeout():
 	chance_to_spawn_bullet()
 		
 func chance_to_spawn_bullet():
-	var randEnemy = int(round(rand_range(3, 26)))
-	var enemy = get_child(randEnemy)
+	var enemy = enemyArray[int(rand_range(0, enemyArray.size() -1))]
 	enemy.isBodyBlocking()
-	if rand_range(0, 6) < 7 and enemy.bodyBlocking == false:
-			shoot_bullet(enemy)
+	if enemy.bodyBlocking == false:
+		enemy_shoot_bullet(enemy)
 		
-func shoot_bullet(var enemy):
+func enemy_shoot_bullet(var enemy):
 	var bullet = bulletScene.instance()
 	var spawnLocation = Vector2((enemy.position.x),(enemy.position.y + 60))	
 	add_child(bullet)
 	bullet.position = spawnLocation
+	bullet.motion = Vector2(0, 5)
 	bullet.scale.x = 0.6
 	bullet.scale.y = 0.6
+ 
+func player_shoot_bullet(var player):
+	var bullet = bulletScene.instance()
+	var spawnLocation = Vector2((player.position.x), (player.position.y - 80))
+	add_child(bullet)
+	bullet.position = spawnLocation
+	bullet.motion = Vector2(0, -5)
+	bullet.scale = Vector2(0.6, 0.6)

@@ -1,11 +1,16 @@
 extends Area2D
 
-var motion = Vector2(0, 5)
+var motion
 
 func _physics_process(_delta):
 	position += motion
-	if position.y > get_viewport().size.y:
-		get_parent().remove_child(self)
+	if position.y > get_viewport().size.y + 60:
+		delete_self()
+	elif position.y < -60:
+		delete_self()
 
-func _on_Area2D_body_entered():
+func _on_Area2D_body_entered(_body):
+	delete_self()
+
+func delete_self():
 	get_parent().remove_child(self)

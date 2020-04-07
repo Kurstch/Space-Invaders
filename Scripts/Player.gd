@@ -11,6 +11,9 @@ func _input(_event):
 		motion.x = -speed
 	else:
 		motion.x = 0
+	if Input.is_action_just_pressed("ui_shoot"):
+		var MainGameScript = get_parent()
+		MainGameScript.player_shoot_bullet(self)
 		
 func _physics_process(_delta):
 	position.x = clamp(position.x, 40, 1048)
