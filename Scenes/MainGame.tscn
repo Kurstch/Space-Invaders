@@ -7,6 +7,8 @@ script = ExtResource( 2 )
 
 [node name="BulletTimer" type="Timer" parent="."]
 
+[node name="RedEnemyCooldown" type="Timer" parent="."]
+
 [node name="Ui" type="Control" parent="."]
 margin_right = 768.0
 margin_bottom = 640.0
@@ -38,3 +40,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
+[connection signal="timeout" from="RedEnemyCooldown" to="." method="_on_RedEnemyCooldown_timeout"]
