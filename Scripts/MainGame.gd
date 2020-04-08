@@ -22,12 +22,12 @@ func InitializeEnemies():
 	for row in rows:
 		for collumn in collumns:
 			var enemy = enemyScene.instance()
-			var spawnLocation = Vector2((36 + (36 * collumn) + (16 * collumn)),(24 + (24 * row) + (16 * row)))
+			var spawnLocation = Vector2((36 + (36 * collumn) + (16 * collumn)),(140 + (24 * row) + (16 * row)))
 			add_child(enemy)
 			enemy.position = spawnLocation
-			if enemy.position.y < 26:
+			if enemy.position.y < 142:
 				enemy.get_child(0).play("Enemy3")
-			elif enemy.position.y > 26 and enemy.position.y < 106:
+			elif enemy.position.y > 142 and enemy.position.y < 222:
 				enemy.get_child(0).play("Enemy2")
 			else:
 				enemy.get_child(0).play("Enemy1")
