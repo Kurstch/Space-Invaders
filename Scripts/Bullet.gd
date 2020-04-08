@@ -10,11 +10,8 @@ func _physics_process(_delta):
 		delete_self()
 
 func _on_Area2D_body_entered(body):
-	check_body(body)
-	delete_self()
-
-func check_body(var body):
 	body.self_hit()
+	delete_self()
 
 func delete_self():
 	queue_free()

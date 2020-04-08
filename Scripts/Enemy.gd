@@ -3,7 +3,7 @@ extends KinematicBody2D
 var bodyBlocking = false
 var jumpDistance = 10
 var JumpsToSide
-var jumps = 0 
+var jumps = 0
 
 func _ready():
 	JumpsToSide = (get_viewport().size.x / (36 + 16))
@@ -14,7 +14,7 @@ func _on_JumpTimer_timeout():
 	movement()
 
 func movement():
-	jumps += 1	
+	jumps += 1
 	if jumps < JumpsToSide:
 		position.x += jumpDistance
 	elif jumps >= JumpsToSide:

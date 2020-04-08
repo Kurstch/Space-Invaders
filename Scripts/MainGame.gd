@@ -32,7 +32,6 @@ func InitializeEnemies():
 			else:
 				enemy.get_child(0).play("Enemy1")
 			enemy.scale = Vector2(3,3)
-			enemy.name = str(collumns * row + collumn)
 			enemyArray.insert(enemyArray.size(), enemy)
 
 func InitializeBulletTimer():
@@ -47,7 +46,7 @@ func chance_to_spawn_bullet():
 	enemy.isBodyBlocking()
 	if enemy.bodyBlocking == false:
 		enemy_shoot_bullet(enemy)
-		
+
 func enemy_shoot_bullet(var enemy):
 	var bullet = bulletScene.instance()
 	var spawnLocation = Vector2((enemy.position.x),(enemy.position.y + 30))	
@@ -67,5 +66,5 @@ func player_shoot_bullet(var player):
 	bullet.scale = Vector2(4, 4)
 
 func enemy_remove_from_array(enemy):
-	var enemyIndex = int(enemy.name)
-	enemyArray.remove(enemyIndex)
+	enemyArray.remove(enemyArray.find(enemy))
+	enemyArray.sort()
