@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Player.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/PlayerDeathAnim1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/PlayerDeathAnim2.png" type="Texture" id=3]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Death",
+"speed": 5.0
+} ]
