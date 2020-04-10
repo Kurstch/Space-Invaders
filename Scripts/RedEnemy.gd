@@ -8,9 +8,12 @@ func _physics_process(_delta):
 		delete_self()
 	elif position.x > 780:
 		delete_self()
+	if $AnimatedSprite.frame == 2:
+		delete_self()
 
 func delete_self():
 	queue_free()
 
 func self_hit():
-	queue_free()
+	$AnimatedSprite.play("Death")
+	motion = Vector2(0,0)

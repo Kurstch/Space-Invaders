@@ -6,7 +6,7 @@ var JumpsToSide
 var jumpsDone = 0
 
 func _ready():
-	JumpsToSide = (get_viewport().size.x / (36 + 16))
+	JumpsToSide = int((get_viewport().size.x / (36 + 16)))
 	$JumpTimer.wait_time = 1.2
 	$JumpTimer.start()
 
@@ -35,5 +35,10 @@ func isBodyBlocking():
 			bodyBlocking = false
 
 func self_hit():
-	get_parent().call("enemy_remove_from_array", self)
-	queue_free()
+	$AnimatedSprite.play("Death")
+	$JumpTimer.stop()
+
+func _physics_process(_delta):
+	if $AnimatedSprite.frame == 2:
+		get_parent().call("enemy_remove_from_array", self)
+		queue_free()

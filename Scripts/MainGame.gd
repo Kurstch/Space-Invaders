@@ -38,7 +38,7 @@ func InitializeEnemies():
 			enemyArray.insert(enemyArray.size(), enemy)
 
 func InitializeBulletTimer():
-	$BulletTimer.wait_time = 1
+	$BulletTimer.wait_time = 0.2
 	$BulletTimer.start()
 
 func InitializeRedEnemyTimer():
@@ -70,7 +70,7 @@ func player_shoot_bullet(var player):
 	add_child(bullet)
 	bullet.get_child(0).play("BulletPlayer")
 	bullet.position = spawnLocation
-	bullet.motion = Vector2(0, -5)
+	bullet.motion = Vector2(0, -15)
 	bullet.scale = Vector2(4, 4)
 
 func enemy_remove_from_array(enemy):
@@ -91,5 +91,6 @@ func spawn_red_enemy():
 		else:
 			spawnLocation = Vector2(778, 96)
 			enemy.motion = Vector2(-5,0)
+		enemy.get_child(0).play("default")
 		enemy.position = spawnLocation
 		enemy.scale = Vector2(3,3)
