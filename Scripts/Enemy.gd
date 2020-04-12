@@ -1,12 +1,11 @@
 extends KinematicBody2D
 
 var bodyBlocking = false
-var jumpDistance = 10
-var JumpsToSide
+var jumpDistance = 23
+var JumpsToSide = 9
 var jumpsDone = 0
 
 func _ready():
-	JumpsToSide = (get_viewport().size.x / (36 + 16))
 	$JumpTimer.wait_time = 1.2
 	$JumpTimer.start()
 
@@ -20,7 +19,7 @@ func movement():
 	elif jumpsDone >= JumpsToSide:
 		jumpDistance = -jumpDistance
 		if $JumpTimer.wait_time > 0.3:
-			$JumpTimer.wait_time -= 0.1
+			$JumpTimer.wait_time -= 0.2
 		position.y += 20
 		jumpsDone = 0
 
@@ -35,5 +34,10 @@ func isBodyBlocking():
 			bodyBlocking = false
 
 func self_hit():
-	get_parent().call("enemy_remove_from_array", self)
-	queue_free()
+	$AnimatedSprite.play("Death")
+	$JumpTimer.stop()
+
+func _physics_process(_delta):
+	if $AnimatedSprite.frame == 2:
+		get_parent().call("enemy_remove_from_array", self)
+		queue_free()

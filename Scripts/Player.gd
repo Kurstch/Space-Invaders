@@ -12,7 +12,6 @@ func _input(_event):
 				ableToFire = false
 				var MainGameScript = get_parent()
 				MainGameScript.player_shoot_bullet(self)
-		
 		if Input.is_action_pressed("ui_right"):
 			motion.x = speed
 		elif Input.is_action_pressed("ui_left"):

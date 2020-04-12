@@ -1,0 +1,20 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Enemy/EnemyRed.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemy/EnemyRedDeath2.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemy/EnemyRedDeath3.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemy/EnemyRedDeath1.png" type="Texture" id=4]
+
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "Death",
+"speed": 10.0
+} ]

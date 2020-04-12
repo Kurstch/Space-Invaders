@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Animated Sprites/Shield1.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Animated Sprites/Shield4.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Animated Sprites/Shield3.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Animated Sprites/Shield5.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://Animated Sprites/Shield2.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://Scripts/Shield.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2, 2 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2, 2 )
+
+[node name="Shield" type="Node2D"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ShieldPart1" type="KinematicBody2D" parent="." groups=[
+"Shield",
+]]
+position = Vector2( -4, 0 )
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ShieldPart1"]
+position = Vector2( -1.19209e-07, 5.96046e-08 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldPart1"]
+shape = SubResource( 2 )
+
+[node name="ShieldPart2" type="KinematicBody2D" parent="." groups=[
+"Shield",
+]]
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ShieldPart2"]
+position = Vector2( 5.96046e-08, 5.96046e-08 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldPart2"]
+shape = SubResource( 1 )
+
+[node name="ShieldPart3" type="KinematicBody2D" parent="." groups=[
+"Shield",
+]]
+position = Vector2( 4, 0 )
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ShieldPart3"]
+position = Vector2( -1.19209e-07, 5.96046e-08 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldPart3"]
+shape = SubResource( 1 )
+
+[node name="ShieldPart4" type="KinematicBody2D" parent="." groups=[
+"Shield",
+]]
+position = Vector2( -4, 4 )
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ShieldPart4"]
+position = Vector2( -1.19209e-07, -1.19209e-07 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldPart4"]
+shape = SubResource( 1 )
+
+[node name="ShieldPart5" type="KinematicBody2D" parent="." groups=[
+"Shield",
+]]
+position = Vector2( 4, 4 )
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ShieldPart5"]
+position = Vector2( -1.19209e-07, -1.19209e-07 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldPart5"]
+shape = SubResource( 1 )
