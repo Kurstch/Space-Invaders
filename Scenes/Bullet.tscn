@@ -4,7 +4,7 @@
 [ext_resource path="res://Animated Sprites/Bullet.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2, 4 )
+extents = Vector2( 3, 4 )
 
 [node name="Bullet" type="Area2D"]
 monitorable = false

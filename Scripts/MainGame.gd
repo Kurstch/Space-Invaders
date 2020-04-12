@@ -4,6 +4,7 @@ var bulletScene = preload("res://Scenes/Bullet.tscn")
 var enemyScene = preload("res://Scenes/Enemy.tscn")
 var playerScene = preload("res://Scenes/Player.tscn")
 var redEnemyScene = preload("res://Scenes/RedEnemy.tscn")
+var shieldScene = preload("res://Scenes/Shield.tscn")
 var enemyArray = []
 var rows = 5
 var collumns = 10
@@ -11,6 +12,7 @@ var collumns = 10
 func _ready():
 	InitializePlayer()
 	InitializeEnemies()
+	InitializeShields()
 	InitializeBulletTimer()
 	InitializeRedEnemyTimer()
 
@@ -37,12 +39,20 @@ func InitializeEnemies():
 			enemy.scale = Vector2(3,3)
 			enemyArray.insert(enemyArray.size(), enemy)
 
+func InitializeShields():
+	for i in 4:
+		var shield = shieldScene.instance()
+		var spawnLocation = Vector2(130 + (164 * i), 470)
+		add_child(shield)
+		shield.position = spawnLocation
+		shield.scale = Vector2(7, 7)
+
 func InitializeBulletTimer():
-	$BulletTimer.wait_time = 0.2
+	$BulletTimer.wait_time = 0.1
 	$BulletTimer.start()
 
 func InitializeRedEnemyTimer():
-	$RedEnemyCooldown.wait_time = 3
+	$RedEnemyCooldown.wait_time = 5
 	$RedEnemyCooldown.start()
 
 func _on_BulletTimer_timeout():
@@ -70,7 +80,7 @@ func player_shoot_bullet(var player):
 	add_child(bullet)
 	bullet.get_child(0).play("BulletPlayer")
 	bullet.position = spawnLocation
-	bullet.motion = Vector2(0, -15)
+	bullet.motion = Vector2(0, -10)
 	bullet.scale = Vector2(4, 4)
 
 func enemy_remove_from_array(enemy):

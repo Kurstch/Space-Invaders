@@ -1,12 +1,11 @@
 extends KinematicBody2D
 
 var bodyBlocking = false
-var jumpDistance = 10
-var JumpsToSide
+var jumpDistance = 23
+var JumpsToSide = 9
 var jumpsDone = 0
 
 func _ready():
-	JumpsToSide = int((get_viewport().size.x / (36 + 16)))
 	$JumpTimer.wait_time = 1.2
 	$JumpTimer.start()
 
@@ -20,7 +19,7 @@ func movement():
 	elif jumpsDone >= JumpsToSide:
 		jumpDistance = -jumpDistance
 		if $JumpTimer.wait_time > 0.3:
-			$JumpTimer.wait_time -= 0.1
+			$JumpTimer.wait_time -= 0.2
 		position.y += 20
 		jumpsDone = 0
 
