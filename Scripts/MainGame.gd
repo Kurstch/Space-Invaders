@@ -9,10 +9,12 @@ var enemyArray = []
 var rows = 5
 var collumns = 10
 
+# Initializations
 func _ready():
 	InitializePlayer()
+	InitializePlayerLives()
 	InitializeEnemies()
-	InitializeShields()
+	#InitializeShields()
 	InitializeBulletTimer()
 	InitializeRedEnemyTimer()
 
@@ -23,6 +25,14 @@ func InitializePlayer():
 	player.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y - 40)
 	player.scale = Vector2(4,4)
 
+func InitializePlayerLives():
+	for i in Global.player_lives:
+		var player = playerScene.instance()
+		add_child(player)
+		player.get_child(0).play("default")
+		player.position = Vector2(728 - (64 * i), 32)
+		player.scale = Vector2(4,4)
+
 func InitializeEnemies():
 	for row in rows:
 		for collumn in collumns:
@@ -32,12 +42,15 @@ func InitializeEnemies():
 			enemy.position = spawnLocation
 			if enemy.position.y < 142:
 				enemy.get_child(0).play("Enemy3")
+				enemy.pointsOnKill = 30
 			elif enemy.position.y > 142 and enemy.position.y < 222:
 				enemy.get_child(0).play("Enemy2")
+				enemy.pointsOnKill = 20
 			else:
 				enemy.get_child(0).play("Enemy1")
+				enemy.pointsOnKill = 10
 			enemy.scale = Vector2(3,3)
-			enemyArray.insert(enemyArray.size(), enemy)
+			enemyArray.append(enemy)
 
 func InitializeShields():
 	for i in 4:
@@ -55,6 +68,7 @@ func InitializeRedEnemyTimer():
 	$RedEnemyCooldown.wait_time = 5
 	$RedEnemyCooldown.start()
 
+# Shoot bullets
 func _on_BulletTimer_timeout():
 	chance_to_spawn_bullet()
 		
@@ -80,13 +94,10 @@ func player_shoot_bullet(var player):
 	add_child(bullet)
 	bullet.get_child(0).play("BulletPlayer")
 	bullet.position = spawnLocation
-	bullet.motion = Vector2(0, -10)
-	bullet.scale = Vector2(4, 4)
+	bullet.motion = Vector2(0, -7)
+	bullet.scale = Vector2(2.5, 2.5)
 
-func enemy_remove_from_array(enemy):
-	enemyArray.remove(enemyArray.find(enemy))
-	enemyArray.sort()
-
+# Red enemy
 func _on_RedEnemyCooldown_timeout():
 	spawn_red_enemy()
 
@@ -104,3 +115,12 @@ func spawn_red_enemy():
 		enemy.get_child(0).play("default")
 		enemy.position = spawnLocation
 		enemy.scale = Vector2(3,3)
+
+# Enemy array
+func enemy_remove_from_array(enemy):
+	enemyArray.remove(enemyArray.find(enemy))
+	enemyArray.sort()
+	if enemyArray.size() <= 0:
+		get_tree().reload_current_scene()
+		Global.score += 150
+	$BulletTimer.wait_time += 0.01
