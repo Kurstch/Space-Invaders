@@ -29,7 +29,7 @@ func self_hit():
 	isAlive = false
 	$AnimatedSprite.play("Death")
 	Global.player_lives -= 1
-	if Global.player_lives <= 0:
+	if Global.player_lives == -1:
 		var pause_screen = get_parent().get_node("PauseScreen")
 		pause_screen.game_over()
 	else:

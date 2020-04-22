@@ -6,14 +6,11 @@ var motion
 func _physics_process(_delta):
 	position += motion
 	if position.x < -11:
-		delete_self()
+		queue_free()
 	elif position.x > 780:
-		delete_self()
+		queue_free()
 	if $AnimatedSprite.frame == 2:
-		delete_self()
-
-func delete_self():
-	queue_free()
+		queue_free()
 
 func self_hit():
 	Global.score += pointsOnKill

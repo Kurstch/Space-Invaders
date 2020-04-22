@@ -17,6 +17,7 @@ func _ready():
 	#InitializeShields()
 	InitializeBulletTimer()
 	InitializeRedEnemyTimer()
+	load_high_score()
 
 func InitializePlayer():
 	var player = playerScene.instance()
@@ -67,6 +68,24 @@ func InitializeBulletTimer():
 func InitializeRedEnemyTimer():
 	$RedEnemyCooldown.wait_time = 5
 	$RedEnemyCooldown.start()
+
+# Save game
+func save_high_score():
+	var file = File.new()
+	file.open("user://high_score.save", File.WRITE)
+	file.store_line(to_json(Global.high_score))
+	file.close()
+
+func load_high_score():
+	var file = File.new()
+	if not file.file_exists("user://high_score.save"):
+		print("no file")
+		return
+	file.open("user://high_score.save", File.READ)
+	Global.high_score = int(file.get_as_text())
+	file.close()
+	var ui = get_node("Ui")
+	ui.update_high_score_label()
 
 # Shoot bullets
 func _on_BulletTimer_timeout():

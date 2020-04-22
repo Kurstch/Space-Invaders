@@ -50,6 +50,7 @@ margin_left = 20.0
 margin_top = 5.0
 margin_right = 748.0
 margin_bottom = 59.0
+custom_constants/separation = 100
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,9 +60,20 @@ margin_top = 7.0
 margin_bottom = 47.0
 custom_fonts/font = SubResource( 1 )
 
+[node name="HScoreLabel" type="Label" parent="Ui/Background/TextPanel/HBoxContainer"]
+margin_left = 100.0
+margin_top = 7.0
+margin_right = 100.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="PauseScreen" type="Control" parent="."]
 pause_mode = 2
-margin_right = 768.0
+margin_left = -2.10529
+margin_right = 765.895
 margin_bottom = 640.0
 script = ExtResource( 4 )
 __meta__ = {
@@ -70,7 +82,7 @@ __meta__ = {
 
 [node name="PausePanel" type="Panel" parent="PauseScreen"]
 visible = false
-modulate = Color( 0, 0, 0, 0.521569 )
+modulate = Color( 0, 0, 0, 0.709804 )
 margin_right = 768.0
 margin_bottom = 640.0
 __meta__ = {

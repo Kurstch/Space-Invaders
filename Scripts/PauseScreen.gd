@@ -1,8 +1,8 @@
 extends Control
 
 func _ready():
-	if Global.player_lives == 0:
-		$GameOverLabel.visible = true
+	if Global.player_lives == -1:
+		$PauseLabel.visible = true
 		pause_game()
 
 func _input(_event):
@@ -10,17 +10,27 @@ func _input(_event):
 		if get_tree().paused == false:
 			$PauseLabel.text = "Paused"
 		pause_game()
-	if Input.is_action_just_pressed("ui_shoot"):
+	if Input.is_action_just_pressed("ui_restart"):
 		var score_label = get_parent().get_node("Ui/Background/TextPanel/HBoxContainer/ScoreLabel")
-		if $PauseLabel.text == "Game Over \n" + str(score_label.text):
-			Global.player_lives = 3
-			Global.score = 0
-			get_tree().reload_current_scene()
+		if $PauseLabel.text == "Game Over\n" + score_label.text + "\n\n\nTo try again press R":
+			reset_game()
+		elif $PauseLabel.text == "Game Over\n" + score_label.text + "\nNew high score!" + "\n\nTo try again press R":
+			reset_game()
 
+func reset_game():
+	Global.player_lives = 3
+	Global.score = 0
+	get_tree().reload_current_scene()
+	get_tree().paused = false
 
 func game_over():
 	var score_label = get_parent().get_node("Ui/Background/TextPanel/HBoxContainer/ScoreLabel")
-	$PauseLabel.text = "Game Over \n" + str(score_label.text)
+	if Global.score > Global.high_score:
+		$PauseLabel.text = "Game Over\n" + score_label.text + "\nNew high score!" + "\n\nTo try again press R"
+		Global.high_score = Global.score
+		get_parent().save_high_score()
+	else:
+		$PauseLabel.text = "Game Over\n" + score_label.text + "\n\n\nTo try again press R"
 	pause_game()
 
 func pause_game():
