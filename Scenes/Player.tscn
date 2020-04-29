@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animated Sprites/Player.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Audio/shoot.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/Explosion.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.58948, 4.13054 )
@@ -18,3 +20,9 @@ frames = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.489018, 0 )
 shape = SubResource( 1 )
+
+[node name="ShootAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

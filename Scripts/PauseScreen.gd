@@ -1,9 +1,13 @@
-extends Control
+extends CanvasLayer
 
 func _ready():
+	if Global.game_started == false:
+		$IntroBackground.visible = true
+		pause_game()
 	if Global.player_lives == -1:
 		$PauseLabel.visible = true
 		pause_game()
+	update_high_score_label()
 
 func _input(_event):
 	if Input.is_action_just_pressed("Pause"):
@@ -16,6 +20,10 @@ func _input(_event):
 			reset_game()
 		elif $PauseLabel.text == "Game Over\n" + score_label.text + "\nNew high score!" + "\n\nTo try again press R":
 			reset_game()
+		if $IntroBackground.visible == true:
+			$IntroBackground.visible = false
+			Global.game_started = true
+			pause_game()
 
 func reset_game():
 	Global.player_lives = 3
@@ -34,7 +42,6 @@ func game_over():
 	pause_game()
 
 func pause_game():
-	get_parent().move_child(self, get_parent().get_child_count())
 	if get_tree().paused == false:
 		$PauseLabel.visible = true
 		$PausePanel.visible = true
@@ -43,3 +50,7 @@ func pause_game():
 		$PauseLabel.visible = false
 		$PausePanel.visible = false
 		get_tree().paused = false
+
+func update_high_score_label():
+	get_parent().load_high_score()
+	$IntroBackground/TextPanel/HScoreLabelBottom.text = "High Score: " + str(Global.high_score)

@@ -3,6 +3,9 @@ extends KinematicBody2D
 var pointsOnKill = 60
 var motion
 
+func _ready():
+	$MoveAudio.play()
+
 func _physics_process(_delta):
 	position += motion
 	if position.x < -11:
@@ -18,3 +21,4 @@ func self_hit():
 	ui.update_score_label()
 	$AnimatedSprite.play("Death")
 	motion = Vector2(0,0)
+	$ExplosionAudio.play()

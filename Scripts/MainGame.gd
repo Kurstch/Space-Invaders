@@ -14,7 +14,7 @@ func _ready():
 	InitializePlayer()
 	InitializePlayerLives()
 	InitializeEnemies()
-	#InitializeShields()
+	InitializeShields()
 	InitializeBulletTimer()
 	InitializeRedEnemyTimer()
 	load_high_score()
@@ -84,19 +84,14 @@ func load_high_score():
 	file.open("user://high_score.save", File.READ)
 	Global.high_score = int(file.get_as_text())
 	file.close()
-	var ui = get_node("Ui")
-	ui.update_high_score_label()
 
 # Shoot bullets
 func _on_BulletTimer_timeout():
-	chance_to_spawn_bullet()
-		
-func chance_to_spawn_bullet():
 	var enemy = enemyArray[int(rand_range(0, enemyArray.size() -1))]
 	enemy.isBodyBlocking()
 	if enemy.bodyBlocking == false:
 		enemy_shoot_bullet(enemy)
-
+		
 func enemy_shoot_bullet(var enemy):
 	var bullet = bulletScene.instance()
 	var spawnLocation = Vector2((enemy.position.x),(enemy.position.y + 30))	
@@ -118,19 +113,16 @@ func player_shoot_bullet(var player):
 
 # Red enemy
 func _on_RedEnemyCooldown_timeout():
-	spawn_red_enemy()
-
-func spawn_red_enemy():
-	if int(rand_range(0,5)) <= 2:
+	if int(rand_range(0,7)) <= 2:
 		var enemy = redEnemyScene.instance()
 		var spawnLocation
 		add_child(enemy)
 		if int(rand_range(1,2)) == 1:
 			spawnLocation = Vector2(-10, 96)
-			enemy.motion = Vector2(5,0)
+			enemy.motion = Vector2(3,0)
 		else:
 			spawnLocation = Vector2(778, 96)
-			enemy.motion = Vector2(-5,0)
+			enemy.motion = Vector2(-3,0)
 		enemy.get_child(0).play("default")
 		enemy.position = spawnLocation
 		enemy.scale = Vector2(3,3)

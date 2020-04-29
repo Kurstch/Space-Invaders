@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Animated Sprites/RedEnemy.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/RedEnemy.gd" type="Script" id=2]
-
+[ext_resource path="res://Audio/Explosion.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/ufo_highpitch.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 4 )
@@ -18,3 +19,14 @@ animation = "Death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="MoveAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="MoveAudio2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
