@@ -4,7 +4,6 @@
 [ext_resource path="res://Sprites/Player/PlayerDeathAnim1.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Player/PlayerDeathAnim2.png" type="Texture" id=3]
 
-
 [resource]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
@@ -12,7 +11,7 @@ animations = [ {
 "name": "default",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Death",
 "speed": 5.0
